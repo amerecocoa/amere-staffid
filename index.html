@@ -23,7 +23,6 @@ body{
   padding:24px 16px;
 }
 
-/* ===== LAYOUT ===== */
 .container{
   max-width:1000px;
   margin:auto;
@@ -35,56 +34,31 @@ body{
   .container{grid-template-columns:1fr}
 }
 
-/* ===== FORM ===== */
+/* FORM */
 .form{
-  background:#ffffff;
+  background:#fff;
   padding:24px;
   border-radius:16px;
 }
-.form h1{
-  margin:0 0 16px;
-  font-size:20px;
-}
-label{
-  display:block;
-  font-size:13px;
-  margin:14px 0 6px;
-}
+label{display:block;font-size:13px;margin:14px 0 6px}
 input{
   width:100%;
   padding:12px;
   border-radius:10px;
   border:1px solid #ccc;
-  font-size:14px;
 }
-.actions{
-  margin-top:18px;
-  display:flex;
-  gap:12px;
-}
+.actions{margin-top:16px;display:flex;gap:12px}
 button{
   padding:12px 16px;
   border-radius:12px;
   border:none;
   cursor:pointer;
-  font-size:14px;
 }
-.generate{
-  background:var(--bg);
-  color:var(--text);
-}
-.download{
-  background:#fff;
-  border:1px solid #ccc;
-}
+.generate{background:var(--bg);color:var(--text)}
+.download{background:#fff;border:1px solid #ccc}
 
-/* ===== PREVIEW ===== */
-.preview{
-  display:flex;
-  justify-content:center;
-}
-
-/* ===== CARD ===== */
+/* CARD */
+.preview{display:flex;justify-content:center}
 .id-card{
   width:360px;
   height:600px;
@@ -97,7 +71,7 @@ button{
   overflow:hidden;
 }
 
-/* ===== CONTENT ===== */
+/* CONTENT */
 .logo{
   position:absolute;
   top:28px;
@@ -106,6 +80,7 @@ button{
   font-weight:600;
 }
 
+/* 🚨 FINAL PHOTO FIX */
 .photo-frame{
   position:absolute;
   top:90px;
@@ -114,43 +89,15 @@ button{
   width:180px;
   height:220px;
   border-radius:24px;
-  background:#000;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+  background-color:#000;
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:contain; /* INI KUNCINYA */
 }
 
-.photo-frame img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-
-.name{
-  position:absolute;
-  top:330px;
-  width:100%;
-  font-size:19px;
-  font-weight:500;
-}
-
-.role{
-  position:absolute;
-  top:362px;
-  width:100%;
-  font-size:14px;
-  opacity:.75;
-}
-
-.sid{
-  position:absolute;
-  top:400px;
-  width:100%;
-  font-size:13px;
-  letter-spacing:1.8px;
-  color:var(--gold);
-}
+.name{position:absolute;top:330px;width:100%;font-size:19px}
+.role{position:absolute;top:362px;width:100%;font-size:14px;opacity:.75}
+.sid{position:absolute;top:400px;width:100%;font-size:13px;letter-spacing:1.8px;color:var(--gold)}
 
 .notice{
   position:absolute;
@@ -161,7 +108,6 @@ button{
   line-height:1.5;
   opacity:.55;
 }
-
 .footer{
   position:absolute;
   bottom:20px;
@@ -176,33 +122,27 @@ button{
 
 <div class="container">
 
-  <!-- FORM -->
   <div class="form">
-    <h1>AMÈRE — Staff ID</h1>
-
     <label>Staff Name</label>
-    <input id="nameInput" placeholder="Full name">
+    <input id="nameInput">
 
     <label>Position</label>
-    <input id="roleInput" placeholder="Chocolatier / Cashier">
+    <input id="roleInput">
 
     <label>Photo</label>
     <input type="file" id="photoInput" accept="image/*">
 
     <div class="actions">
       <button class="generate" id="genBtn">Generate</button>
-      <button class="download" id="dlBtn">⬇ Download</button>
+      <button class="download" id="dlBtn">⬇</button>
     </div>
   </div>
 
-  <!-- CARD -->
   <div class="preview">
     <div class="id-card" id="card">
       <div class="logo">AMÈRE</div>
 
-      <div class="photo-frame">
-        <img id="photoImg" alt="">
-      </div>
+      <div class="photo-frame" id="photoFrame"></div>
 
       <div class="name" id="namePrev">Staff Name</div>
       <div class="role" id="rolePrev">Position</div>
@@ -222,20 +162,22 @@ button{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 photoInput.onchange = e=>{
-  const file=e.target.files[0];
+  const file = e.target.files[0];
   if(!file) return;
-  const r=new FileReader();
-  r.onload=()=>photoImg.src=r.result;
+  const r = new FileReader();
+  r.onload = ()=>{
+    photoFrame.style.backgroundImage = `url('${r.result}')`;
+  };
   r.readAsDataURL(file);
 };
 
-genBtn.onclick=()=>{
-  namePrev.innerText=nameInput.value||"Staff Name";
-  rolePrev.innerText=roleInput.value||"Position";
-  idPrev.innerText="ID — AMR-"+Math.floor(100000+Math.random()*900000);
+genBtn.onclick = ()=>{
+  namePrev.innerText = nameInput.value || "Staff Name";
+  rolePrev.innerText = roleInput.value || "Position";
+  idPrev.innerText = "ID — AMR-" + Math.floor(100000 + Math.random()*900000);
 };
 
-dlBtn.onclick=()=>{
+dlBtn.onclick = ()=>{
   html2canvas(card,{
     scale:3,
     width:360,
