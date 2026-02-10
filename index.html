@@ -1,206 +1,254 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>AMÈRE — Staff ID Generator</title>
+<title>AMÈRE — Staff ID</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 :root{
-  --dark:#241814;
-  --brown:#3a241b;
-  --cream:#f5efe8;
-  --gold:#c7a76c;
+  --bg:#120c0a;
+  --gold:#c9a46a;
+  --text:#f6f1ea;
 }
 
-*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+*{
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
 
 body{
   margin:0;
-  background:var(--cream);
-  color:var(--dark);
+  background:#eee7df;
+  padding:24px 16px;
 }
 
-.wrapper{
-  max-width:1100px;
+/* ===== LAYOUT ===== */
+.container{
+  max-width:1000px;
   margin:auto;
-  padding:32px 20px;
-}
-
-h1{font-weight:600;letter-spacing:1px}
-.subtitle{opacity:.6;margin-bottom:32px}
-
-.generator{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:420px 1fr;
   gap:40px;
 }
 @media(max-width:900px){
-  .generator{grid-template-columns:1fr}
+  .container{grid-template-columns:1fr}
 }
 
 /* ===== FORM ===== */
-.form-group{margin-bottom:18px}
-label{font-size:13px;margin-bottom:6px;display:block}
+.form{
+  background:#ffffff;
+  padding:24px;
+  border-radius:16px;
+}
+.form h1{
+  margin:0 0 16px;
+  font-size:20px;
+}
+label{
+  display:block;
+  font-size:13px;
+  margin:14px 0 6px;
+}
 input{
   width:100%;
   padding:12px;
   border-radius:10px;
-  border:1px solid #ddd;
+  border:1px solid #ccc;
+  font-size:14px;
 }
-
+.actions{
+  margin-top:18px;
+  display:flex;
+  gap:12px;
+}
 button{
-  padding:12px 18px;
+  padding:12px 16px;
   border-radius:12px;
   border:none;
-  background:var(--dark);
-  color:var(--cream);
   cursor:pointer;
+  font-size:14px;
 }
-button.secondary{
-  background:transparent;
-  color:var(--dark);
-  border:1px solid var(--dark);
+.generate{
+  background:var(--bg);
+  color:var(--text);
 }
-button:hover{opacity:.9}
+.download{
+  background:#fff;
+  border:1px solid #ccc;
+}
 
-/* ===== CARD ===== */
-.card-wrapper{
+/* ===== PREVIEW ===== */
+.preview{
   display:flex;
   justify-content:center;
 }
 
+/* ===== CARD ===== */
 .id-card{
-  aspect-ratio:3/5;
-  width:320px;
-  background:linear-gradient(160deg,#2b1c16,#1c120f);
-  border-radius:22px;
-  padding:26px 22px;
-  color:var(--cream);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
-}
-
-.logo{
-  letter-spacing:4px;
-  font-weight:600;
-  margin-bottom:22px;
-}
-
-.photo{
-  width:150px;
-  height:190px;
-  border-radius:16px;
+  width:360px;
+  height:600px;
+  position:relative;
+  background:radial-gradient(120% 120% at top,#2b1c16 0%,#120c0a 70%);
+  border-radius:30px;
+  box-shadow:0 50px 90px rgba(0,0,0,.55);
+  color:var(--text);
+  text-align:center;
   overflow:hidden;
-  background:#000;
 }
-.photo img{
+
+/* ===== CONTENT ===== */
+.logo{
+  position:absolute;
+  top:28px;
   width:100%;
-  height:100%;
-  object-fit:cover;
+  letter-spacing:6px;
+  font-weight:600;
+}
+
+.photo-frame{
+  position:absolute;
+  top:90px;
+  left:50%;
+  transform:translateX(-50%);
+  width:180px;
+  height:220px;
+  border-radius:24px;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.photo-frame img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
 }
 
 .name{
-  margin-top:22px;
-  font-size:18px;
+  position:absolute;
+  top:330px;
+  width:100%;
+  font-size:19px;
   font-weight:500;
-  letter-spacing:.5px;
 }
 
-.position{
-  margin-top:6px;
+.role{
+  position:absolute;
+  top:362px;
+  width:100%;
   font-size:14px;
   opacity:.75;
 }
 
-.staff-id{
-  margin-top:18px;
+.sid{
+  position:absolute;
+  top:400px;
+  width:100%;
   font-size:13px;
-  letter-spacing:1.5px;
+  letter-spacing:1.8px;
   color:var(--gold);
 }
 
+.notice{
+  position:absolute;
+  top:460px;
+  width:100%;
+  padding:0 28px;
+  font-size:10px;
+  line-height:1.5;
+  opacity:.55;
+}
+
 .footer{
-  margin-top:auto;
+  position:absolute;
+  bottom:20px;
+  width:100%;
   font-size:11px;
-  opacity:.6;
-  letter-spacing:1px;
+  opacity:.5;
 }
 </style>
 </head>
 
 <body>
-<div class="wrapper">
-  <h1>AMÈRE — Staff ID Generator</h1>
-  <div class="subtitle">Luxury staff identity, generated instantly</div>
 
-  <div class="generator">
-    <div>
-      <div class="form-group">
-        <label>Nama Staff</label>
-        <input id="nameInput" placeholder="Nama lengkap">
-      </div>
+<div class="container">
 
-      <div class="form-group">
-        <label>Posisi</label>
-        <input id="positionInput" placeholder="Kasir / Chocolatier">
-      </div>
+  <!-- FORM -->
+  <div class="form">
+    <h1>AMÈRE — Staff ID</h1>
 
-      <div class="form-group">
-        <label>Foto Staff</label>
-        <input type="file" id="photoInput" accept="image/*">
-      </div>
+    <label>Staff Name</label>
+    <input id="nameInput" placeholder="Full name">
 
-      <button onclick="generate()">Generate Staff ID</button>
-      <button class="secondary" onclick="download()">Download PNG</button>
-    </div>
+    <label>Position</label>
+    <input id="roleInput" placeholder="Chocolatier / Cashier">
 
-    <div class="card-wrapper">
-      <div class="id-card" id="card">
-        <div class="logo">AMÈRE</div>
+    <label>Photo</label>
+    <input type="file" id="photoInput" accept="image/*">
 
-        <div class="photo">
-          <img id="photoPreview">
-        </div>
-
-        <div class="name" id="namePreview">Staff Name</div>
-        <div class="position" id="positionPreview">Position</div>
-        <div class="staff-id" id="idPreview">ID — AMR-XXXXXX</div>
-
-        <div class="footer">AMÈRE Official Staff</div>
-      </div>
+    <div class="actions">
+      <button class="generate" id="genBtn">Generate</button>
+      <button class="download" id="dlBtn">⬇ Download</button>
     </div>
   </div>
+
+  <!-- CARD -->
+  <div class="preview">
+    <div class="id-card" id="card">
+      <div class="logo">AMÈRE</div>
+
+      <div class="photo-frame">
+        <img id="photoImg" alt="">
+      </div>
+
+      <div class="name" id="namePrev">Staff Name</div>
+      <div class="role" id="rolePrev">Position</div>
+      <div class="sid" id="idPrev">ID — AMR-000000</div>
+
+      <div class="notice">
+        This card remains the property of AMÈRE.<br>
+        If found, please return it to an official AMÈRE representative.
+      </div>
+
+      <div class="footer">AMÈRE Official Staff</div>
+    </div>
+  </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
-function randID(){
-  return "AMR-" + Math.floor(100000 + Math.random()*900000);
-}
-
-function generate(){
-  namePreview.innerText = nameInput.value || "Staff Name";
-  positionPreview.innerText = positionInput.value || "Position";
-  idPreview.innerText = "ID — " + randID();
-}
-
 photoInput.onchange = e=>{
+  const file=e.target.files[0];
+  if(!file) return;
   const r=new FileReader();
-  r.onload=()=>photoPreview.src=r.result;
-  r.readAsDataURL(e.target.files[0]);
+  r.onload=()=>photoImg.src=r.result;
+  r.readAsDataURL(file);
 };
 
-function download(){
-  html2canvas(card,{scale:3,backgroundColor:null}).then(c=>{
+genBtn.onclick=()=>{
+  namePrev.innerText=nameInput.value||"Staff Name";
+  rolePrev.innerText=roleInput.value||"Position";
+  idPrev.innerText="ID — AMR-"+Math.floor(100000+Math.random()*900000);
+};
+
+dlBtn.onclick=()=>{
+  html2canvas(card,{
+    scale:3,
+    width:360,
+    height:600,
+    backgroundColor:null
+  }).then(c=>{
     const a=document.createElement("a");
-    a.download="amere-id.png";
+    a.download="amere-staff-id.png";
     a.href=c.toDataURL("image/png");
     a.click();
   });
-}
+};
 </script>
+
 </body>
 </html>
