@@ -2,165 +2,131 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>AMÈRE — Staff ID Card Generator</title>
+<title>AMÈRE — Staff ID Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- ===== AMÈRE COLOR PALETTE ===== -->
 <style>
-:root {
-  --amere-dark: #2b1f1a;     /* dark chocolate */
-  --amere-brown: #4b2e24;   /* cocoa */
-  --amere-cream: #f4efe9;   /* cream */
-  --amere-gold: #c9a25d;    /* muted gold */
+:root{
+  --dark:#241814;
+  --brown:#3a241b;
+  --cream:#f5efe8;
+  --gold:#c7a76c;
 }
 
-* {
-  box-sizing: border-box;
-  font-family: "Inter", system-ui, sans-serif;
+*{box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--dark);
 }
 
-body {
-  margin: 0;
-  background: var(--amere-cream);
-  color: var(--amere-dark);
+.wrapper{
+  max-width:1100px;
+  margin:auto;
+  padding:32px 20px;
 }
 
-.wrapper {
-  max-width: 1100px;
-  margin: auto;
-  padding: 32px 20px;
-}
+h1{font-weight:600;letter-spacing:1px}
+.subtitle{opacity:.6;margin-bottom:32px}
 
-h1 {
-  letter-spacing: 1px;
-  font-weight: 600;
-  margin-bottom: 6px;
+.generator{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
 }
-
-.subtitle {
-  opacity: 0.7;
-  margin-bottom: 32px;
-}
-
-/* ===== LAYOUT ===== */
-.generator {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
-
-@media (max-width: 900px) {
-  .generator {
-    grid-template-columns: 1fr;
-  }
+@media(max-width:900px){
+  .generator{grid-template-columns:1fr}
 }
 
 /* ===== FORM ===== */
-.form-group {
-  margin-bottom: 18px;
+.form-group{margin-bottom:18px}
+label{font-size:13px;margin-bottom:6px;display:block}
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
 }
 
-label {
-  display: block;
-  font-size: 14px;
-  margin-bottom: 6px;
+button{
+  padding:12px 18px;
+  border-radius:12px;
+  border:none;
+  background:var(--dark);
+  color:var(--cream);
+  cursor:pointer;
+}
+button.secondary{
+  background:transparent;
+  color:var(--dark);
+  border:1px solid var(--dark);
+}
+button:hover{opacity:.9}
+
+/* ===== CARD ===== */
+.card-wrapper{
+  display:flex;
+  justify-content:center;
 }
 
-input {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 15px;
+.id-card{
+  aspect-ratio:3/5;
+  width:320px;
+  background:linear-gradient(160deg,#2b1c16,#1c120f);
+  border-radius:22px;
+  padding:26px 22px;
+  color:var(--cream);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
 }
 
-button {
-  background: var(--amere-dark);
-  color: var(--amere-cream);
-  border: none;
-  padding: 12px 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  margin-right: 10px;
+.logo{
+  letter-spacing:4px;
+  font-weight:600;
+  margin-bottom:22px;
 }
 
-button.secondary {
-  background: transparent;
-  color: var(--amere-dark);
-  border: 1px solid var(--amere-dark);
+.photo{
+  width:150px;
+  height:190px;
+  border-radius:16px;
+  overflow:hidden;
+  background:#000;
+}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-button:hover {
-  opacity: 0.9;
+.name{
+  margin-top:22px;
+  font-size:18px;
+  font-weight:500;
+  letter-spacing:.5px;
 }
 
-/* ===== ID CARD ===== */
-.card-wrapper {
-  display: flex;
-  justify-content: center;
+.position{
+  margin-top:6px;
+  font-size:14px;
+  opacity:.75;
 }
 
-.id-card {
-  width: 320px;
-  height: 500px;
-  background: var(--amere-dark);
-  border-radius: 18px;
-  padding: 22px;
-  color: var(--amere-cream);
-  position: relative;
+.staff-id{
+  margin-top:18px;
+  font-size:13px;
+  letter-spacing:1.5px;
+  color:var(--gold);
 }
 
-.logo {
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
-}
-
-.photo {
-  width: 140px;
-  height: 180px;
-  margin: auto;
-  border-radius: 12px;
-  background: #000;
-  overflow: hidden;
-}
-
-.photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.name {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 18px;
-  font-weight: 500;
-}
-
-.position {
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.8;
-  margin-top: 4px;
-}
-
-.staff-id {
-  text-align: center;
-  margin-top: 18px;
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-
-.footer {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  text-align: center;
-  font-size: 11px;
-  opacity: 0.6;
+.footer{
+  margin-top:auto;
+  font-size:11px;
+  opacity:.6;
+  letter-spacing:1px;
 }
 </style>
 </head>
@@ -168,19 +134,18 @@ button:hover {
 <body>
 <div class="wrapper">
   <h1>AMÈRE — Staff ID Generator</h1>
-  <div class="subtitle">Generate official staff ID card instantly</div>
+  <div class="subtitle">Luxury staff identity, generated instantly</div>
 
   <div class="generator">
-    <!-- FORM -->
     <div>
       <div class="form-group">
         <label>Nama Staff</label>
-        <input type="text" id="nameInput" placeholder="Nama lengkap">
+        <input id="nameInput" placeholder="Nama lengkap">
       </div>
 
       <div class="form-group">
         <label>Posisi</label>
-        <input type="text" id="positionInput" placeholder="Kasir / Chocolatier / Restocker">
+        <input id="positionInput" placeholder="Kasir / Chocolatier">
       </div>
 
       <div class="form-group">
@@ -188,22 +153,21 @@ button:hover {
         <input type="file" id="photoInput" accept="image/*">
       </div>
 
-      <button onclick="generateID()">Generate Staff ID</button>
-      <button class="secondary" onclick="downloadPNG()">Download PNG</button>
+      <button onclick="generate()">Generate Staff ID</button>
+      <button class="secondary" onclick="download()">Download PNG</button>
     </div>
 
-    <!-- CARD PREVIEW -->
     <div class="card-wrapper">
-      <div class="id-card" id="idCard">
+      <div class="id-card" id="card">
         <div class="logo">AMÈRE</div>
 
         <div class="photo">
-          <img id="photoPreview" src="" alt="">
+          <img id="photoPreview">
         </div>
 
         <div class="name" id="namePreview">Staff Name</div>
         <div class="position" id="positionPreview">Position</div>
-        <div class="staff-id" id="staffID">ID — XXXXX</div>
+        <div class="staff-id" id="idPreview">ID — AMR-XXXXXX</div>
 
         <div class="footer">AMÈRE Official Staff</div>
       </div>
@@ -211,38 +175,30 @@ button:hover {
   </div>
 </div>
 
-<!-- ===== SCRIPT ===== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script>
-function randomStaffID() {
-  return "AMR-" + Math.floor(100000 + Math.random() * 900000);
+function randID(){
+  return "AMR-" + Math.floor(100000 + Math.random()*900000);
 }
 
-function generateID() {
-  document.getElementById("namePreview").innerText =
-    document.getElementById("nameInput").value || "Staff Name";
-
-  document.getElementById("positionPreview").innerText =
-    document.getElementById("positionInput").value || "Position";
-
-  document.getElementById("staffID").innerText = "ID — " + randomStaffID();
+function generate(){
+  namePreview.innerText = nameInput.value || "Staff Name";
+  positionPreview.innerText = positionInput.value || "Position";
+  idPreview.innerText = "ID — " + randID();
 }
 
-document.getElementById("photoInput").addEventListener("change", function(e) {
-  const reader = new FileReader();
-  reader.onload = () => {
-    document.getElementById("photoPreview").src = reader.result;
-  };
-  reader.readAsDataURL(e.target.files[0]);
-});
+photoInput.onchange = e=>{
+  const r=new FileReader();
+  r.onload=()=>photoPreview.src=r.result;
+  r.readAsDataURL(e.target.files[0]);
+};
 
-function downloadPNG() {
-  html2canvas(document.getElementById("idCard")).then(canvas => {
-    const link = document.createElement("a");
-    link.download = "amere-staff-id.png";
-    link.href = canvas.toDataURL();
-    link.click();
+function download(){
+  html2canvas(card,{scale:3,backgroundColor:null}).then(c=>{
+    const a=document.createElement("a");
+    a.download="amere-id.png";
+    a.href=c.toDataURL("image/png");
+    a.click();
   });
 }
 </script>
